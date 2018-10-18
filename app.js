@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores,  roundScore, activePlayer;
+var scores,  roundScore, activePlayer, gamePlaying;
 
 init();   
 
@@ -24,23 +24,25 @@ document.getElementById('current-1').textContent = '0';
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
 
-  // 1. Random number
-  var dice = Math.floor(Math.random() * 6 ) + 1;
-
-  // 2. Display the result
-  var diceDOM = document.querySelector('.dice');
-  diceDOM.style.display = 'block';
-  diceDOM.src = 'dice-' + dice + '.png';
-
-  // 3. Update the round score if the rolled number was not a 1
-  if (dice !== 1){
-    //Add the score
-    roundScore += dice;
-    document.querySelector('#current-' + activePlayer).textContent = roundScore;
-  } else{
-    //Next player
-   nextPlayer();
-   }
+  if(gamePlaying){
+    // 1. Random number
+    var dice = Math.floor(Math.random() * 6 ) + 1;
+    
+    // 2. Display the result
+    var diceDOM = document.querySelector('.dice');
+    diceDOM.style.display = 'block';
+    diceDOM.src = 'dice-' + dice + '.png';
+    
+    // 3. Update the round score if the rolled number was not a 1
+    if (dice !== 1){
+      //Add the score
+      roundScore += dice;
+      document.querySelector('#current-' + activePlayer).textContent = roundScore;
+    } else{
+      //Next player
+      nextPlayer();
+    }
+  }
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
@@ -57,6 +59,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    gamePlaying = false;
   } else {
     //Next player
     nextPlayer();
@@ -85,6 +88,7 @@ function init() {
   scores = [0, 0];
   activePlayer = 0;
   roundScore = 0;
+  gamePlaying = true;
 
   document.querySelector('.dice').style.display = 'none';
 
@@ -103,6 +107,26 @@ function init() {
 
 
 }
+
+var personProto = {
+  calculateAge: function() {
+    console.log(2016 - this.yearOfBirth);
+  }
+};
+
+// var john = Object.create(personProto) ;
+//   john.name= 'John';
+//   john.yearOfBirth= 1990;
+//   john.job = 'teacher';
+
+
+var jane = Object.create(personProto, 
+{
+  name: { value: 'Jane'},
+  yearOfBirth: { value: 1969 },
+  job: { value: 'designer'}
+});
+
 
 
 
