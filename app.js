@@ -32,6 +32,25 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
   var diceDOM = document.querySelector('.dice');
   diceDOM.style.display = 'block';
   diceDOM.src = 'dice-' + dice + '.png';
+
+  // 3. Update the round score if the rolled number was not a 1
+  if (dice !== 1){
+    //Add the score
+    roundScore += dice;
+    document.querySelector('#current-' + activePlayer).textContent = roundScore;
+  } else{
+    //Next player
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    roundscore = 0;
+
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0'; 
+
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
+    document.querySelector('.dice').style.display = 'none';
+   }
 });
 
 // document.querySelector('#current-' + activePlayer).textContent = dice;  //We call this a setter beacause we set a value 
