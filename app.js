@@ -107,29 +107,6 @@ function init() {
 
 
 }
-
-var personProto = {
-  calculateAge: function() {
-    console.log(2016 - this.yearOfBirth);
-  }
-};
-
-// var john = Object.create(personProto) ;
-//   john.name= 'John';
-//   john.yearOfBirth= 1990;
-//   john.job = 'teacher';
-
-
-var jane = Object.create(personProto, 
-{
-  name: { value: 'Jane'},
-  yearOfBirth: { value: 1969 },
-  job: { value: 'designer'}
-});
-
-
-
-
 // document.querySelector('#current-' + activePlayer).textContent = dice;  //We call this a setter beacause we set a value 
 //The textContent method just change the plain text not the html in contrary to the innerHTML method.
 // document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
